@@ -27,6 +27,42 @@
 .App-link {
   color: #61dafb;
 }
+.main {
+  background-color: #6D757D;
+}
+.game-icon {
+  font-size: 3em;
+  box-shadow: rgba(236, 229, 229, 0.35) 0px 5px 15px;
+  cursor: pointer;
+
+}
+
+.active {
+  animation: blink 1s steps(1, end) infinite;
+  cursor: progress;
+}
+
+.inactive{
+  cursor: pointer;
+}
+
+.reset{
+  position : absolute;
+  bottom   : 0;
+  margin-bottom: 4rem;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
 
 @keyframes App-logo-spin {
   from {
