@@ -25,15 +25,15 @@ const iconStyles = (col) => {
 
 
 
-export const Card = ({rowIndex, items, playGame, qrow, qcol}) => {
+export const Card = ({rowIndex, items, playGame, qrow, qcol, play}) => {
 
 
   return (
     <>
         {items.length > 0 ? items.map((item, index) => {
             return (
-                <div key={index} className="col-md-2 m-0">
-                    <span className={`game-icon ${index === qcol && rowIndex === qrow ? 'active' : 'inactive'}`}
+                <div key={index} className={`col-md-2 m-0 ${!play ? 'disabled' : ''}`}>
+                    <span className={`game-icon ${index === qcol && rowIndex === qrow && play ? 'active' : 'inactive'}`}
                         style={iconStyles(index)}
                         onClick={() => playGame(rowIndex, index)}
                         dangerouslySetInnerHTML={{__html: item }}

@@ -9,6 +9,7 @@ export const CardRow = ({rowItems}) => {
     const [qrow, setqRow] = React.useState(1);
     // const [acol, setCol] = React.useState();
     // const [arow, setRow] = React.useState();
+    const [play, setPlay] = React.useState(true);
     const [gameItems, setGameItems] = React.useState(rowItems)
     const indices = [0, 1, 2, 3, 4, 5]
 
@@ -43,17 +44,34 @@ export const CardRow = ({rowItems}) => {
         setScore(0);
     }
 
+    function pauseGame() {
+        setPlay(!play)
+    }
+
+    function resumeGame() {
+        setPlay(!play);
+    }
+
   return (
     <div className="container pt-5">
-        <div className="row m-4">
+        <div className="row m-3">
             <div className="col-sm-3">
             <div className="row m-0 p-0">
                 Score: {score}
             </div>
             <div className="row reset">
-                <button onClick={resetGame} className="btn btn-secondary">Restart Game</button>
-            </div>
+                <div className="col-md-6">
+                {play?
+                    <button onClick={pauseGame} className="btn btn-secondary">Pause</button>
+                    :
+                    <button onClick={resumeGame} className="btn btn-secondary">Resume</button>
+                }
+                </div>
 
+                <div className="col-md-6">
+                    <button onClick={resetGame} className={`btn btn-secondary ${!play ? 'disabled' : ''}`}>Reset</button>
+                </div>
+                </div>
             </div>
             <div className="col-sm-6">
             {gameItems.length > 0 ? gameItems.map((colItems, index) => {
@@ -61,10 +79,11 @@ export const CardRow = ({rowItems}) => {
                     <div key={index} className="row m-0 p-0">
                         <Card
                             rowIndex={index}
-                            items={shuffle(colItems)}
+                            items={colItems}
                             playGame={playGame}
                             qrow={qrow}
                             qcol={qcol}
+                            play={play}
                         />
                     </div>
                 )
